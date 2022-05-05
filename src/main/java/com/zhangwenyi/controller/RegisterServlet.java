@@ -42,18 +42,18 @@ public class RegisterServlet extends HttpServlet {
         user.setPassword(request.getParameter("password"));
         user.setEmail(request.getParameter("email"));
         user.setGender(request.getParameter("gender"));
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            java.util.Date date = format.parse(request.getParameter("birthDate"));
+            java.util.Date date = format.parse(request.getParameter("birthdate"));
             java.sql.Date birthdate = new java.sql.Date(date.getTime());
             user.setBirthdate(birthdate);
             UserDao userDao = new UserDao();
             boolean saveUser = userDao.saveUser(con, user);
             if (saveUser) {
-                request.getRequestDispatcher("WEB-INF/views/login.jsp");
+                request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
             } else {
                 System.out.println("register error!");
-                request.getRequestDispatcher("WEB-INF/views/register.jsp");
+                request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request, response);
             }
         } catch (ParseException | SQLException e) {
             e.printStackTrace();

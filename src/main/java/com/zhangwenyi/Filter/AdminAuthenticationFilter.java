@@ -20,21 +20,20 @@ public class AdminAuthenticationFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         HttpSession session = httpRequest.getSession(false);
 
-        boolean isLoggedIn = (session!=null && session.getAttribute("user")!=null);
-        String loginURI = httpRequest.getContextPath()+"/admin/login";
+        boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
+        String loginURI = httpRequest.getContextPath() + "/admin/login";
         boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
         boolean isLoginPage = httpRequest.getRequestURI().endsWith("login");
-        if (isLoggedIn && (isLoginRequest || isLoginPage)){
+        if (isLoggedIn && (isLoginRequest || isLoginPage)) {
             //the admin is already login ande he is trying login again
             //then forward to the admin homepage
-            servletRequest.getRequestDispatcher("/admin/home").forward(httpRequest,httpResponse);//go to home
+            servletRequest.getRequestDispatcher("/admin/home").forward(httpRequest, httpResponse);//go to home
 
-        }else if (isLoggedIn || isLoginRequest){
+        } else if (isLoggedIn || isLoginRequest) {
 
-            filterChain.doFilter(servletRequest,servletResponse);//go to next destination
-        }else {
-            System.out.println(httpRequest.getContextPath());
-            httpResponse.sendRedirect(httpRequest.getContextPath()+"/admin/login");//go to login
+            filterChain.doFilter(servletRequest, servletResponse);//go to next destination
+        } else {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");//go to login
         }
     }
 

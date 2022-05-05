@@ -58,10 +58,10 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("登入成功");
                 /*achieve remember Me*/
                 // set user in session, can get in many jsp or servlet
-                if (request.getParameter("rememberMe").equals("1")) {
+                if (request.getParameter("remember") != null && request.getParameter("remember").equals("1")) {
                     Cookie cUserNameCookie = new Cookie("cUserName", request.getParameter("username"));
-                    Cookie cPassWordCookie = new Cookie("cPassWord", request.getParameter("password"));
-                    Cookie rememberMeCookie = new Cookie("rememberMe", request.getParameter("rememberMe"));
+                    Cookie cPassWordCookie = new Cookie("cPassword", request.getParameter("password"));
+                    Cookie rememberMeCookie = new Cookie("cRememberMe", request.getParameter("rememberMe"));
                     // setMaxAge
                     cUserNameCookie.setMaxAge(5);
                     cPassWordCookie.setMaxAge(5);
@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
                     response.addCookie(rememberMeCookie);
                 }
                 session.setAttribute("user", user);
-                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request, response);
             } else {
                 //out.print("Username or password Error!!!");
                 request.setAttribute("message", "Username or Password Error!!!");

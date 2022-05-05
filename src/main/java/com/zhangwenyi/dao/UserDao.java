@@ -10,14 +10,13 @@ public class UserDao implements IUserDao {
     @Override
     public boolean saveUser(Connection con, User user) throws SQLException {
         Boolean ifSave = false;
-        String sql = "insert into usertable values (?, ?, ?, ?, ?, ?)";
+        String sql = "insert into usertable(username, password, email, gender, birthdate) values (?, ?, ?, ?, ?)";
         PreparedStatement statement = con.prepareStatement(sql);
-        statement.setInt(1, user.getId());
-        statement.setString(2, user.getUsername());
-        statement.setString(3, user.getPassword());
-        statement.setString(4, user.getEmail());
-        statement.setString(5,user.getGender());
-        statement.setDate(6, user.getBirthdate());
+        statement.setString(1, user.getUsername());
+        statement.setString(2, user.getPassword());
+        statement.setString(3, user.getEmail());
+        statement.setString(4,user.getGender());
+        statement.setDate(5, user.getBirthdate());
         int i = statement.executeUpdate();
         if (i > 0){
             ifSave = true;
