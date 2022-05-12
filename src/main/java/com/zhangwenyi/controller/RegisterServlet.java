@@ -1,6 +1,6 @@
 package com.zhangwenyi.controller;
 
-import com.zhangwenyi.dao.UserDao;
+import com.zhanghwenyi.dao.UserDao;
 import com.zhangwenyi.model.User;
 
 import javax.servlet.ServletException;
