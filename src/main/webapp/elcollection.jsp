@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
-  User: hmk05
+  User:  zhangwenyi
   Date: 2022/5/6
   Time: 15:48
   To change this template use File | Settings | File Templates.
@@ -36,7 +36,14 @@
     <li>${fName[0]} ${lName[0]} --> ${cName["Ellison"]}</li>
     <li>${fName[1]} ${lName[1]} --> ${cName[lName[1]]}</li>
     <li>${fName[2]} ${lName[2]} --> ${cName["McNealy"]}</li>
-
+</ul>
+<hr>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<h2>Use c:forEach to get items from array</h2>
+<ul>
+    <c:forEach var="l" items="${fName}">
+        <li>${l}</li>
+    </c:forEach>
 </ul>
 </body>
 </html>

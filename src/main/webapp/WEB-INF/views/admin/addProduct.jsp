@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <select name="categoryId">
-                            <option>-- Category --</option>
+                            <option value="0">-- Category --</option>
                             <!-- loop_start -->
 
                             <option value="1">FASHION</option>

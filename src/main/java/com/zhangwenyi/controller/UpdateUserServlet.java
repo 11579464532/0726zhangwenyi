@@ -1,4 +1,4 @@
-package com.zhangwneyi.controller;
+package com.zhangwenyi.controller;
 
 import com.zhangwenyi.dao.UserDao;
 import com.zhangwenyi.model.User;

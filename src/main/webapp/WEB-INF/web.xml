@@ -65,7 +65,7 @@
     <!-- we need to tell tomcat -->
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.hanming.controller.RegisterServlet</servlet-class>
+        <servlet-class>com.zhangwenyi.controller.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -73,7 +73,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.hanming.controller.LoginServlet</servlet-class>
+        <servlet-class>com.zhangwenyi.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>

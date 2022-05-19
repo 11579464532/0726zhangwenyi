@@ -1,6 +1,6 @@
-<%@ page import="com.hanming.week10.StringBean" %><%--
+<%@ page import="com.zhangwenyi.week10.StringBean" %><%--
   Created by IntelliJ IDEA.
-  User: hmk05
+  User: zhangwenyi
   Date: 2022/4/29
   Time: 15:23
   To change this template use File | Settings | File Templates.
@@ -13,7 +13,7 @@
 <body>
 
 <h2>Use bean class in jsp-using java code</h2>
-<jsp:useBean id="bean" class="com.hanming.week10.StringBean" /> <!-- scope == page -->
+<jsp:useBean id="bean" class="com.zhangwenyi.week10.StringBean" /> <!-- scope == page -->
 <%
     // using bean
     // com.hanming.week10.StringBean bean = new StringBean();

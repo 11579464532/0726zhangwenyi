@@ -1,7 +1,7 @@
-<%@ page import="com.hanming.week11.Person" %>
-<%@ page import="com.hanming.week11.Dog" %><%--
+<%@ page import="com.zhangwenyi.week11.Person" %>
+<%@ page import="com.zhangwenyi.week11.Dog" %><%--
   Created by IntelliJ IDEA.
-  User: hmk05
+  User: zhangwenyi
   Date: 2022/5/6
   Time: 15:19
   To change this template use File | Settings | File Templates.

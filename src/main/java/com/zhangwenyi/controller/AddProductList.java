@@ -13,9 +13,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.hanming.dao.ProductDao;
-import com.hanming.model.Category;
-import com.hanming.model.Product;
+import com.zhangwenyi.dao.ProductDao;
+import com.zhangwenyi.model.Category;
+import com.zhangwenyi.model.Product;
 import  org.apache.log4j.Logger;
 
 @WebServlet(name = "AddProductList", value = "/admin/addProduct")

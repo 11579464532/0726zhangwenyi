@@ -1,4 +1,4 @@
-<%@ page import="com.hanming.model.User" %>
+<%@ page import="com.zhangwenyi.model.User" %>
 <%@ page import="java.sql.Date" %><%--
   Created by IntelliJ IDEA.
   User: hmk05

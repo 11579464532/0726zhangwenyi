@@ -25,7 +25,7 @@ public class Category {
         Active = active;
     }
 
-    public static List<Category> findAllCategory(Connection con) {
+    public List<Category> findAllCategory(Connection con) {
         List<Category> categories = new ArrayList<>();
         String queryString = "select * from category";
         try {
@@ -44,10 +44,10 @@ public class Category {
         return categories;
     }
 
-    public static String findByCategory(Connection con, int categoryId){
+    public static String findByCategoryId(Connection con, int categoryId){
         String categoryName = null;
         try {
-            PreparedStatement statement = con.prepareStatement("select CategoryName from category where CategoryId == ?");
+            PreparedStatement statement = con.prepareStatement("select CategoryName from category where CategoryId = ?");
             statement.setInt(1, categoryId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
