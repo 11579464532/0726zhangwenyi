@@ -1,6 +1,6 @@
 <%@ page import="com.zhangwenyi.week10.StringBean" %><%--
   Created by IntelliJ IDEA.
-  User: zhangwenyi
+
   Date: 2022/4/29
   Time: 15:23
   To change this template use File | Settings | File Templates.
