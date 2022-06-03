@@ -1,4 +1,4 @@
-package com.zhangwenyi.example.zhangwenyi0726;
+package com.zhangwenyi.example.zhangwenyi;
 
 import java.io.*;
 import javax.servlet.http.*;

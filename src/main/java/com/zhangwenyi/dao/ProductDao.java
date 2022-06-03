@@ -58,7 +58,26 @@ public class ProductDao implements IProductDao {
 
     @Override
     public List<Product> findByCategoryId(int categoryId, Connection con) {
-        return null;
+        List<Product> list=new ArrayList<>();
+        try{
+            String queryString = "select * from Product where categoryId=?";
+            PreparedStatement pt = con.prepareStatement(queryString);
+            pt.setInt(1,categoryId);
+            ResultSet rs = pt.executeQuery();
+            while(rs.next()){
+                Product product = new Product();
+                product.setProductId(rs.getInt("ProductId"));
+                product.setProductName(rs.getString("ProductName"));
+                product.setProductDescription(rs.getString("ProductDescription"));
+                product.setPrice(rs.getDouble("price"));
+                product.setCategoryId(rs.getInt("CategoryId"));
+                list.add(product);
+            }
+            System.out.println("successful");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
     }
 
     @Override

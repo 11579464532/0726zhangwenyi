@@ -90,5 +90,12 @@
         <servlet-name>LifeCycleServlet</servlet-name>
         <url-pattern>/life</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <jsp-file>/WEB-INF/views/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -3,65 +3,87 @@ package com.zhangwenyi.controller;
 import com.zhangwenyi.dao.UserDao;
 import com.zhangwenyi.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-@WebServlet(name = "UpdateUserServlet", value = "/updateUser")
+@WebServlet(name = "UpdateUserServlet", value = "/updateUser")//url
 public class UpdateUserServlet extends HttpServlet {
-    Connection con = null;
+    Connection con =null;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        /// TODO 1: GET 4 CONTEXT PARAM - DRIVER , URL , USERNAME , PASSWORD
-        // TODO 2: GET JDBC connection
-        //only one one
         con = (Connection) getServletContext().getAttribute("con");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //when user click updateUser - method is get
-        request.getSession(false).invalidate();
-        request.setAttribute("message", "you are successfully logged out!");
-        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
+        //write code
+        //TODO 1 : forward to WEB-INF/views/updateUser.jsp
+        //TODO 2 : create one jsp page - update User
+        if (request.getParameter("id") != null){
+            User user = new User();
+            UserDao userDao = new UserDao();
+            try {
+                user = userDao.findById(con, Integer.parseInt(request.getParameter("id")));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            if (user == null) {
+                request.setAttribute("message", "Please login");
+            }
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("WEB-INF/views/updateUserView.jsp").forward(request,response);
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //when method =post -request come in doPost
-        //get all data - from Request
-        User user = new User();
-        User user1 = (User) request.getSession().getAttribute("user");
-
-        user.setId(user1.getId());
-        user.setUsername(request.getParameter("username"));//get Username <input type="text" name="username" />
-        user.setPassword(request.getParameter("password"));
-        user.setEmail(request.getParameter("email"));
-        user.setGender(request.getParameter("gender"));
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
+        //write code to update info - can update password, email, gender, birthDate
+        con = (Connection) getServletContext().getAttribute("con");
+        ///TODO 1: get all(6) request parameters
+        //TODO 2: create an object of User Model
+        //TODO 3: set all 6 request parameters values into User model - setXXX()
+        //TODO 4: create an object of UserDao
+        //TODO 5: call updateUser() in UserDao
+        //TODO 6: forward to WEB-INF/views/userInfo.jsp
+        int id =Integer.parseInt(request.getParameter("id"));//get id <input type="hidden" name="id" />
+        String username =request.getParameter("username");//get Username <input type="text" name="username" />
+        String password =request.getParameter("password");//get  password <input type="password" name="password" />
+        String email =request.getParameter("email");//get <input type="text" name="email" />
+        String gender =request.getParameter("gender");//get <input type="radio" name="gender"/>
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
         try {
-            java.util.Date date = format.parse(request.getParameter("birthDate"));
-            java.sql.Date birthdate = new java.sql.Date(date.getTime());
-            user.setBirthdate(birthdate);
-            UserDao userDao = new UserDao();
-            int i = userDao.updateUser(con, user);
-            if (i > 0) {
-                request.getRequestDispatcher("WEB-INF/views/index.jsp");
-            } else {
-                System.out.println("Update user error!");
-                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp");
-            }
-        } catch (ParseException | SQLException e) {
+            date = format.parse(request.getParameter("birthdate"));
+        } catch (ParseException e) {
             e.printStackTrace();
+        }
+        java.sql.Date birthDate = new java.sql.Date(date.getTime()); //get Birth Date <input type="text" name="birthDate" />
+        User u=new User();
+        u.setId(id);
+        u.setUsername(username);
+        u.setPassword(password);
+        u.setEmail(email);
+        u.setGender(gender);
+        u.setBirthdate(birthDate);
+        UserDao dao =new UserDao();
+        try{
+            dao.updateUser(con,u);
+            User updateUser = dao.findById(con, id);
+            HttpSession session = request.getSession();
+            session.removeAttribute("user");
+            session.setAttribute("user",updateUser);
+            request.getRequestDispatcher("accountDetails").forward(request,response);
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }
